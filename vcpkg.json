@@ -1,0 +1,17 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/vcpkg-tool/main/docs/vcpkg.schema.json",
+  "name": "playground-vulkan",
+  "version": "1.0.0",
+  "dependencies": [
+    "vulkan",
+    "glfw3",
+    "glm",
+    "spirv-reflect",
+    "stb",
+    {
+      "name": "imgui",
+      "features": [ "wchar32" ]
+    }
+  ],
+  "builtin-baseline": "b328539dd9c022e3f11b267ef68f11ad3a85eaf8"
+}
