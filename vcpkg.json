@@ -10,7 +10,7 @@
     "stb",
     {
       "name": "imgui",
-      "features": [ "wchar32" ]
+      "features": [ "wchar32", "glfw-binding", "vulkan-binding" ]
     }
   ],
   "builtin-baseline": "b328539dd9c022e3f11b267ef68f11ad3a85eaf8"

@@ -38,11 +38,15 @@ message(STATUS "STB found")
 file(GLOB_RECURSE SOURCES
     "${CMAKE_SOURCE_DIR}/src/*.cpp"
     "${CMAKE_SOURCE_DIR}/src/*.c"
+    "${CMAKE_SOURCE_DIR}/Engine/src/*.cpp"
+    "${CMAKE_SOURCE_DIR}/Engine/src/*.c"
 )
 
 file(GLOB_RECURSE HEADERS
     "${CMAKE_SOURCE_DIR}/src/*.h"
     "${CMAKE_SOURCE_DIR}/src/*.hpp"
+    "${CMAKE_SOURCE_DIR}/Engine/include/*.h"
+    "${CMAKE_SOURCE_DIR}/Engine/include/*.hpp"
 )
 
 # Create executable
@@ -61,6 +65,7 @@ if(SOURCES)
     # Include directories
     target_include_directories(${PROJECT_NAME} PRIVATE
         ${CMAKE_SOURCE_DIR}/src
+        ${CMAKE_SOURCE_DIR}/Engine/include
         ${Vulkan_INCLUDE_DIRS}
         ${Stb_INCLUDE_DIR}
     )
