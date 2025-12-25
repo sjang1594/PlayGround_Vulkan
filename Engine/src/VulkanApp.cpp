@@ -672,20 +672,21 @@ void VulkanApp::setupImGui() {
     init_info.Queue = graphicsQueue;
     init_info.PipelineCache = VK_NULL_HANDLE;
     init_info.DescriptorPool = imguiDescriptorPool;
+    init_info.RenderPass = renderPass;
     init_info.Subpass = 0;
     init_info.MinImageCount = MAX_FRAMES_IN_FLIGHT;
     init_info.ImageCount = static_cast<uint32_t>(swapChainImages.size());
     init_info.MSAASamples = VK_SAMPLE_COUNT_1_BIT;
     init_info.Allocator = nullptr;
     init_info.CheckVkResultFn = nullptr;
-    ImGui_ImplVulkan_Init(&init_info, renderPass);
+    ImGui_ImplVulkan_Init(&init_info);
 
     VkCommandBuffer command_buffer = commandBuffers[0];
     VkCommandBufferBeginInfo begin_info = {};
     begin_info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_BEGIN_INFO;
     begin_info.flags = VK_COMMAND_BUFFER_USAGE_ONE_TIME_SUBMIT_BIT;
     vkBeginCommandBuffer(command_buffer, &begin_info);
-    ImGui_ImplVulkan_CreateFontsTexture(command_buffer);
+    ImGui_ImplVulkan_CreateFontsTexture();
     vkEndCommandBuffer(command_buffer);
 
     VkSubmitInfo submit_info = {};
@@ -694,6 +695,7 @@ void VulkanApp::setupImGui() {
     submit_info.pCommandBuffers = &command_buffer;
     vkQueueSubmit(graphicsQueue, 1, &submit_info, VK_NULL_HANDLE);
     vkQueueWaitIdle(graphicsQueue);
+    ImGui_ImplVulkan_DestroyFontsTexture();
 
     std::cout << "ImGui initialized successfully with Fira Code font!" << std::endl;
 }
